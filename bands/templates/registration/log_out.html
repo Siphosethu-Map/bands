@@ -1,0 +1,15 @@
+<!--we extend the base.html to still the page-->
+{% extends 'band.base.html' %}
+
+{% block title %} Logging Out {% endblock title %}
+
+{% block content %}
+
+<!--logging out page and message-->
+<div>
+    <h1>Logging out</h1>
+    <p>'Till Next Time</p>
+    <a href="{% url 'bands:home' %}">Home</a>
+</div>
+
+{% endblock %}

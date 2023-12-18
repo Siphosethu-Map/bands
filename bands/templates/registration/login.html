@@ -1,0 +1,32 @@
+<!--login html file
+we extend the base.html to still the page-->
+{% extends 'band.base.html' %}
+
+{% block title %} Login {% endblock title %}
+
+{% block content %}
+
+<h1>Login as user</h1>
+
+<!--the form that the user will use to login-->
+<form action="{% url 'bands:authen_user' %}" method="post" >
+    {% csrf_token %}
+    <label for="user">Username</label>
+    <input type="text" name="username" placeholder="username" required>
+    <br><br>
+    <label for="password">Password</label>
+    <input type="password" name="password" required>
+    <br><br>
+
+    <button type="submit" class="btn btn-primary">Login</button>
+
+</form>
+
+<div>
+    <br>
+    <p>Don't have an account?</p>
+    <a href="{% url 'bands:register' %}">Register</a>
+</div>
+
+
+{% endblock %}

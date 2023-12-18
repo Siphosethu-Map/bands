@@ -1,0 +1,25 @@
+<!--registration html file. user will get a rendered page of this file to register-->
+{%extends 'band.base.html' %}
+
+{% block title %} Registration {% endblock title %}
+
+{% block content %}
+
+<h1>Register a user</h1>
+<br>
+
+{% if form.errors %}
+<!--a message a user will receive if there is an issue registering-->
+<p>There was an error detected in your form, see below..</p>
+
+{% endif %}
+
+<!--the form that the user will register-->
+<form action="{% url 'bands:register' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <br>
+    <button type="submit" class="btn btn-primary">Register</button>
+</form>
+
+{% endblock %}

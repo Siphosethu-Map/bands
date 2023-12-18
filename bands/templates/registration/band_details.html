@@ -1,0 +1,22 @@
+<!--we extend the base.html to still the page-->
+{% extends 'band.base.html' %}
+
+{% block title %} Band Details {% endblock title %}
+
+{% block content %}
+
+<h1>Band Details</h1>
+
+<!--The bands details will are on this page-->
+<!--with links to different pages-->
+<div>
+    <h1>{{ band.name }}</h1>
+    <p>Genre: {{ band.genre }}</p>
+    <p>Date formed: {{ band.formed_date }}</p>
+    <p>Description: {{ band.description }}</p><br><br>
+    <a href="{% url 'bands:home' %}">Home</a><br>
+    <a href="{% url 'bands:about' %}">About</a><br>
+    <a href="{% url 'bands:log_out' %}">Log out</a>
+</div>
+
+{% endblock %}

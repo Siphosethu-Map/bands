@@ -1,0 +1,16 @@
+<!--we extend the base.html to style the page-->
+{% extends 'band.base.html' %}
+
+{% block title %} About {% endblock title %}
+
+{% block content %}
+
+<!--html file for about page with links to other pages-->
+<div>
+    <h1>About us</h1>
+    <p>this is a fictional web</p><br>
+    <a href="{% url 'bands:home' %}">Home</a>
+    <a href="{% url 'bands:log_out' %}">Log out</a>
+</div>
+
+{% endblock %}

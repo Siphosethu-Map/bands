@@ -1,0 +1,27 @@
+<!--we extend the base.html to still the page-->
+{% extends 'band.base.html' %}
+
+{% block title %} Welcome Page {% endblock title %}
+
+{% block content %}
+
+<!--Home page of the app
+an iteration will accur to display all bands in the app-->
+<div>
+    <h1>Welcome to My Bands Website</h1>
+    <ul>
+        {% for band in bands %}
+            <li><a href="{% url 'bands:band_details' band.id %} ">{{ band.name }}</a></li>
+        {% empty %}
+            <li>No bands available</li>
+        {% endfor %}
+    </ul>
+    <!--links for different pages of the app-->
+    <a href="{% url 'bands:login' %}">Log out</a><br>
+    <a href="{% url 'bands:add_band' %}">Add A Band</a><br>
+    <a href="{% url 'bands:about' %}">About</a><br>
+    <a href="{% url 'bands:log_out' %}">Log out</a>
+</div>
+
+{% endblock %}
+
