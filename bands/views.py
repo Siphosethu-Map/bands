@@ -12,11 +12,12 @@ def user_login(request):
     return render(request, 'registration/login.html')
 
 
-# data from the 'login.html' file is sent here to be authenticated
-# the username and password will be pulled from the the 'login.html' file
-# if correct, the user will be sent to the 'polls:index' page/app
-# if there is a problem logging in,'user_auth:login' page is called so you can
-# try to login again
+""" data from the 'login.html' file is sent here to be authenticated
+ the username and password will be pulled from the the 'login.html' file
+ if correct, the user will be sent to the 'polls:index' page/app
+ if there is a problem logging in,'user_auth:login' page is called so you can
+ try to login again """
+
 
 def authenticate_user(request):
     username = request.POST['username']
@@ -51,9 +52,10 @@ def about(request):
     return render(request, 'registration/about.html')
 
 
-# To be able to add a band to the app, logging in will be required
-# an unregistered user or a user that has not logged in will not be all access
-# to add a band.
+""" To be able to add a band to the app, logging in will be required
+ an unregistered user or a user that has not logged in will not be all access
+ to add a band. """
+
 
 @login_required(login_url='login')
 def add_band(request):
@@ -74,9 +76,11 @@ def log_out(request):
     return render(request, 'registration/log_out.html')
 
 
-# this is where the user will register the account
-# after successful register, user is sent to the home page
-# if its not successful, user will be sent back to registration page
+""" this is where the user will register the account
+ after successful register, user is sent to the home page
+ if its not successful, user will be sent back to registration page """
+
+
 def register(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
