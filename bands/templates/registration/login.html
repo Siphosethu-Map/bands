@@ -1,32 +1,29 @@
-<!--login html file
-we extend the base.html to still the page-->
 {% extends 'band.base.html' %}
-
-{% block title %} Login {% endblock title %}
+{% block title %}Login — BandVault{% endblock title %}
 
 {% block content %}
+<div class="auth-wrap">
+    <div class="auth-card">
+        <h1 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 0.4rem;">Welcome back</h1>
+        <p style="color: var(--muted); font-size: 0.875rem; margin-bottom: 2rem;">Log in to add bands to the vault.</p>
 
-<h1>Login as user</h1>
+        <form action="{% url 'bands:authen_user' %}" method="post">
+            {% csrf_token %}
+            <div style="margin-bottom: 1.25rem;">
+                <label class="form-label">Username</label>
+                <input type="text" class="form-control" name="username" placeholder="your username" required>
+            </div>
+            <div style="margin-bottom: 1.75rem;">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-control" name="password" placeholder="••••••••" required>
+            </div>
+            <button type="submit" class="btn-accent w-100">Log In</button>
+        </form>
 
-<!--the form that the user will use to login-->
-<form action="{% url 'bands:authen_user' %}" method="post" >
-    {% csrf_token %}
-    <label for="user">Username</label>
-    <input type="text" name="username" placeholder="username" required>
-    <br><br>
-    <label for="password">Password</label>
-    <input type="password" name="password" required>
-    <br><br>
-
-    <button type="submit" class="btn btn-primary">Login</button>
-
-</form>
-
-<div>
-    <br>
-    <p>Don't have an account?</p>
-    <a href="{% url 'bands:register' %}">Register</a>
+        <hr class="section-divider">
+        <p style="color: var(--muted); font-size: 0.875rem; text-align: center; margin: 0;">
+            Don't have an account? <a href="{% url 'bands:register' %}">Register</a>
+        </p>
+    </div>
 </div>
-
-
 {% endblock %}

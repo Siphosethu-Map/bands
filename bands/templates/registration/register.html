@@ -1,25 +1,55 @@
-<!--registration html file. user will get a rendered page of this file to register-->
-{%extends 'band.base.html' %}
-
-{% block title %} Registration {% endblock title %}
+{% extends 'band.base.html' %}
+{% block title %}Register — BandVault{% endblock title %}
 
 {% block content %}
+<div class="auth-wrap">
+    <div class="auth-card">
+        <h1 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 0.4rem;">Create an account</h1>
+        <p style="color: var(--muted); font-size: 0.875rem; margin-bottom: 2rem;">Join BandVault and start adding bands.</p>
 
-<h1>Register a user</h1>
-<br>
+        {% if form.errors %}
+        <div style="background: rgba(255,80,80,0.1); border: 1px solid rgba(255,80,80,0.3); border-radius: 4px; padding: 0.75rem 1rem; margin-bottom: 1.25rem; font-size: 0.875rem; color: #ff8080;">
+            Please fix the errors below before continuing.
+        </div>
+        {% endif %}
 
-{% if form.errors %}
-<!--a message a user will receive if there is an issue registering-->
-<p>There was an error detected in your form, see below..</p>
+        <form action="{% url 'bands:register' %}" method="post">
+            {% csrf_token %}
+            <div style="margin-bottom: 1.25rem;">
+                <label class="form-label">Username</label>
+                <input type="text" class="form-control" name="username" placeholder="choose a username" required>
+                {% if form.username.errors %}
+                <p style="color: #ff8080; font-size: 0.8rem; margin-top: 0.4rem;">{{ form.username.errors|join:", " }}</p>
+                {% endif %}
+            </div>
+            <div style="margin-bottom: 1.25rem;">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control" name="email" placeholder="your@email.com">
+                {% if form.email.errors %}
+                <p style="color: #ff8080; font-size: 0.8rem; margin-top: 0.4rem;">{{ form.email.errors|join:", " }}</p>
+                {% endif %}
+            </div>
+            <div style="margin-bottom: 1.25rem;">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-control" name="password1" placeholder="••••••••" required>
+                {% if form.password1.errors %}
+                <p style="color: #ff8080; font-size: 0.8rem; margin-top: 0.4rem;">{{ form.password1.errors|join:", " }}</p>
+                {% endif %}
+            </div>
+            <div style="margin-bottom: 1.75rem;">
+                <label class="form-label">Confirm Password</label>
+                <input type="password" class="form-control" name="password2" placeholder="••••••••" required>
+                {% if form.password2.errors %}
+                <p style="color: #ff8080; font-size: 0.8rem; margin-top: 0.4rem;">{{ form.password2.errors|join:", " }}</p>
+                {% endif %}
+            </div>
+            <button type="submit" class="btn-accent w-100">Create Account</button>
+        </form>
 
-{% endif %}
-
-<!--the form that the user will register-->
-<form action="{% url 'bands:register' %}" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <br>
-    <button type="submit" class="btn btn-primary">Register</button>
-</form>
-
+        <hr class="section-divider">
+        <p style="color: var(--muted); font-size: 0.875rem; text-align: center; margin: 0;">
+            Already have an account? <a href="{% url 'bands:login' %}">Log in</a>
+        </p>
+    </div>
+</div>
 {% endblock %}

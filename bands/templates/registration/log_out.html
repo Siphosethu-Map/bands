@@ -1,15 +1,16 @@
-<!--we extend the base.html to still the page-->
 {% extends 'band.base.html' %}
-
-{% block title %} Logging Out {% endblock title %}
+{% block title %}Logged Out — BandVault{% endblock title %}
 
 {% block content %}
-
-<!--logging out page and message-->
-<div>
-    <h1>Logging out</h1>
-    <p>'Till Next Time</p>
-    <a href="{% url 'bands:home' %}">Home</a>
+<div class="auth-wrap">
+    <div class="auth-card" style="text-align: center;">
+        <p style="font-size: 2rem; margin-bottom: 1rem;">👋</p>
+        <h1 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 0.5rem;">See you next time</h1>
+        <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem;">You've been logged out of BandVault.</p>
+        <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
+            <a href="{% url 'bands:home' %}" class="btn-accent">Browse Bands</a>
+            <a href="{% url 'bands:login' %}" class="btn-outline-accent">Log Back In</a>
+        </div>
+    </div>
 </div>
-
 {% endblock %}

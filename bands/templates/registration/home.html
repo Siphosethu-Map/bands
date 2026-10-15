@@ -1,27 +1,51 @@
-<!--we extend the base.html to still the page-->
 {% extends 'band.base.html' %}
-
-{% block title %} Welcome Page {% endblock title %}
+{% block title %}BandVault — Discover Bands{% endblock title %}
 
 {% block content %}
+<div class="page-wrap">
+    <!-- Hero -->
+    <div style="padding: 3rem 0 2rem;">
+        <p style="color: var(--accent); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.75rem;">Your music directory</p>
+        <h1 style="font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 700; line-height: 1.05; margin-bottom: 1rem;">
+            Every band.<br>One place.
+        </h1>
+        <p style="color: var(--muted); max-width: 480px; line-height: 1.7; margin-bottom: 1.75rem;">
+            Discover bands across every genre, or add one to the vault yourself.
+        </p>
+        <a href="{% url 'bands:add_band' %}" class="btn-accent">+ Add a Band</a>
+    </div>
 
-<!--Home page of the app
-an iteration will accur to display all bands in the app-->
-<div>
-    <h1>Welcome to My Bands Website</h1>
-    <ul>
+    <hr class="section-divider">
+
+    <!-- Band count -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+        <h2 style="font-size: 1.1rem; font-weight: 600; margin: 0;">
+            All Bands
+            <span style="color: var(--muted); font-size: 0.875rem; font-weight: 400; margin-left: 0.5rem;">
+                ({{ bands|length }})
+            </span>
+        </h2>
+    </div>
+
+    <!-- Band grid -->
+    {% if bands %}
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem;">
         {% for band in bands %}
-            <li><a href="{% url 'bands:band_details' band.id %} ">{{ band.name }}</a></li>
-        {% empty %}
-            <li>No bands available</li>
+        <a href="{% url 'bands:band_details' band.id %}" class="band-card">
+            <div class="band-name">{{ band.name }}</div>
+            <span class="genre-badge">{{ band.genre }}</span>
+            <p style="color: var(--muted); font-size: 0.8rem; margin-top: 0.75rem; margin-bottom: 0;">
+                Formed {{ band.formed_date|date:"Y" }}
+            </p>
+        </a>
         {% endfor %}
-    </ul>
-    <!--links for different pages of the app-->
-    <a href="{% url 'bands:login' %}">Log out</a><br>
-    <a href="{% url 'bands:add_band' %}">Add A Band</a><br>
-    <a href="{% url 'bands:about' %}">About</a><br>
-    <a href="{% url 'bands:log_out' %}">Log out</a>
+    </div>
+    {% else %}
+    <div style="text-align: center; padding: 4rem 0; color: var(--muted);">
+        <p style="font-size: 2rem; margin-bottom: 0.5rem;">🎸</p>
+        <p style="margin-bottom: 1.5rem;">No bands in the vault yet.</p>
+        <a href="{% url 'bands:add_band' %}" class="btn-accent">Add the first one</a>
+    </div>
+    {% endif %}
 </div>
-
 {% endblock %}
-

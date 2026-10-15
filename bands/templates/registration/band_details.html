@@ -1,22 +1,23 @@
-<!--we extend the base.html to still the page-->
 {% extends 'band.base.html' %}
-
-{% block title %} Band Details {% endblock title %}
+{% block title %}{{ band.name }} — BandVault{% endblock title %}
 
 {% block content %}
+<div class="page-wrap">
+    <a href="{% url 'bands:home' %}" style="color: var(--muted); font-size: 0.875rem;">← Back to all bands</a>
 
-<h1>Band Details</h1>
+    <div style="margin-top: 2rem; max-width: 700px;">
+        <span class="genre-badge" style="margin-bottom: 1rem; display: inline-block;">{{ band.genre }}</span>
+        <h1 style="font-size: clamp(2.5rem, 6vw, 3.5rem); font-weight: 700; line-height: 1.05; margin-bottom: 0.5rem;">
+            {{ band.name }}
+        </h1>
+        <p style="color: var(--muted); font-size: 0.875rem; margin-bottom: 2rem;">
+            Formed {{ band.formed_date|date:"F j, Y" }}
+        </p>
 
-<!--The bands details will are on this page-->
-<!--with links to different pages-->
-<div>
-    <h1>{{ band.name }}</h1>
-    <p>Genre: {{ band.genre }}</p>
-    <p>Date formed: {{ band.formed_date }}</p>
-    <p>Description: {{ band.description }}</p><br><br>
-    <a href="{% url 'bands:home' %}">Home</a><br>
-    <a href="{% url 'bands:about' %}">About</a><br>
-    <a href="{% url 'bands:log_out' %}">Log out</a>
+        <hr class="section-divider">
+
+        <h3 style="font-size: 0.8rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem;">About</h3>
+        <p style="line-height: 1.8; color: var(--text);">{{ band.description }}</p>
+    </div>
 </div>
-
 {% endblock %}
