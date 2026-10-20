@@ -17,28 +17,42 @@
             {% csrf_token %}
             <div style="margin-bottom: 1.25rem;">
                 <label class="form-label">Username</label>
-                <input type="text" class="form-control" name="username" placeholder="choose a username" required>
+                <input type="text" class="form-control" name="username"
+                    value="{{ form.username.value|default:'' }}"
+                    placeholder="choose a username" required>
                 {% if form.username.errors %}
                 <p style="color: #ff8080; font-size: 0.8rem; margin-top: 0.4rem;">{{ form.username.errors|join:", " }}</p>
                 {% endif %}
             </div>
             <div style="margin-bottom: 1.25rem;">
-                <label class="form-label">Email</label>
-                <input type="email" class="form-control" name="email" placeholder="your@email.com">
-                {% if form.email.errors %}
-                <p style="color: #ff8080; font-size: 0.8rem; margin-top: 0.4rem;">{{ form.email.errors|join:", " }}</p>
+                <label class="form-label">First Name</label>
+                <input type="text" class="form-control" name="first_name"
+                    value="{{ form.first_name.value|default:'' }}"
+                    placeholder="your first name" required>
+                {% if form.first_name.errors %}
+                <p style="color: #ff8080; font-size: 0.8rem; margin-top: 0.4rem;">{{ form.first_name.errors|join:", " }}</p>
                 {% endif %}
             </div>
             <div style="margin-bottom: 1.25rem;">
                 <label class="form-label">Password</label>
-                <input type="password" class="form-control" name="password1" placeholder="••••••••" required>
+                <div style="position: relative;">
+                    <input type="password" class="form-control" name="password1"
+                        id="password1" placeholder="••••••••" required>
+                    <span onclick="togglePassword('password1', 'eye1')"
+                        style="position: absolute; right: 0.9rem; top: 50%; transform: translateY(-50%); cursor: pointer; color: var(--muted); font-size: 0.85rem;" id="eye1">👁</span>
+                </div>
                 {% if form.password1.errors %}
                 <p style="color: #ff8080; font-size: 0.8rem; margin-top: 0.4rem;">{{ form.password1.errors|join:", " }}</p>
                 {% endif %}
             </div>
             <div style="margin-bottom: 1.75rem;">
                 <label class="form-label">Confirm Password</label>
-                <input type="password" class="form-control" name="password2" placeholder="••••••••" required>
+                <div style="position: relative;">
+                    <input type="password" class="form-control" name="password2"
+                        id="password2" placeholder="••••••••" required>
+                    <span onclick="togglePassword('password2', 'eye2')"
+                        style="position: absolute; right: 0.9rem; top: 50%; transform: translateY(-50%); cursor: pointer; color: var(--muted); font-size: 0.85rem;" id="eye2">👁</span>
+                </div>
                 {% if form.password2.errors %}
                 <p style="color: #ff8080; font-size: 0.8rem; margin-top: 0.4rem;">{{ form.password2.errors|join:", " }}</p>
                 {% endif %}
@@ -52,4 +66,18 @@
         </p>
     </div>
 </div>
+
+<script>
+function togglePassword(fieldId, eyeId) {
+    const field = document.getElementById(fieldId);
+    const eye = document.getElementById(eyeId);
+    if (field.type === 'password') {
+        field.type = 'text';
+        eye.textContent = '🙈';
+    } else {
+        field.type = 'password';
+        eye.textContent = '👁';
+    }
+}
+</script>
 {% endblock %}
