@@ -144,3 +144,4 @@ my_env.bak/
 staticfiles/
 /static_root/
 /mediafiles/
+media/
