@@ -64,9 +64,10 @@ def add_band(request):
         genre = request.POST['genre']
         formed_date = request.POST['formed_date']
         description = request.POST['description']
+        image = request.FILES.get('image')
 
         new_band = Band(name=name, genre=genre, formed_date=formed_date,
-                        description=description)
+                        description=description, image=image)
         new_band.save()
     return render(request, 'registration/add_band.html')
 

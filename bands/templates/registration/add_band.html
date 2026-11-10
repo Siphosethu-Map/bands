@@ -8,7 +8,7 @@
         <h1 style="font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;">Add a Band</h1>
         <p style="color: var(--muted); margin-bottom: 2rem; font-size: 0.9rem;">Fill in the details below to add a band to the vault.</p>
 
-        <form method="post" action="">
+        <form method="post" action="" enctype="multipart/form-data">
             {% csrf_token %}
             <div style="margin-bottom: 1.25rem;">
                 <label class="form-label">Band Name</label>
@@ -21,6 +21,10 @@
             <div style="margin-bottom: 1.25rem;">
                 <label class="form-label">Date Formed</label>
                 <input type="date" class="form-control" id="formed_date" name="formed_date" required>
+            </div>
+            <div style="margin-bottom: 1.25rem;">
+                <label class="form-label">Band Photo (optional)</label>
+                <input type="file" class="form-control" name="image" accept="image/*">
             </div>
             <div style="margin-bottom: 1.75rem;">
                 <label class="form-label">Description</label>

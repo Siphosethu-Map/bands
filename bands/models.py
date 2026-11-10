@@ -17,7 +17,7 @@ class Band(models.Model):
     genre = models.CharField(max_length=80, null=False, blank=False)
     formed_date = models.DateField()
     description = models.TextField()
-
+    image = models.ImageField(upload_to='band_images/', blank=True)
 
 def __str__(self):
     return self.title
